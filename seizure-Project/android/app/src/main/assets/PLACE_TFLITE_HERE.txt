@@ -1,0 +1,10 @@
+Place the trained RGF-Net model file here as `rgf_net.tflite`.
+
+Expected model contract (see com.auraguard.phone.ml.InferenceEngine):
+  Input  : FloatArray of length 19 * 1280 + 6 = 24326
+           - 19 channels x 1280 samples (10s @ 128Hz windowed signal features)
+           - 6 trailing biometric features [HR_mean, HR_std, HRV_rmssd, accel_mag_mean, accel_mag_std, motion_score]
+  Output : Single Float in [0,1] -- probability of pre-ictal state in next ~3 minutes.
+
+If this file is missing at runtime InferenceEngine falls back to a dummy
+score of 0.05 so the UI is still demonstrable on a fresh emulator.
