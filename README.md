@@ -1,214 +1,174 @@
-# AI Learning Coach 🤖📚
+<div align="center">
 
-A fully functional full-stack web application that delivers personalized AI learning experiences. The platform ingests content from multiple sources (RSS feeds, YouTube, Twitter/X, websites), processes it using RAG (Retrieval-Augmented Generation) with Gemini embeddings and Supabase pgvector, and generates personalized weekly learning digests delivered via email.
+# 🛡️ Aura Watch — On-Device Seizure Pre-Ictal Guardian
 
-## ✨ Features
+**A pocket-sized neural early-warning system for tonic-clonic seizures.**
 
-- **🎯 Personalized Learning Goals**: Set weekly learning objectives with customizable difficulty levels
-- **📡 Multi-Source Content Ingestion**: Automatically collect content from RSS feeds, YouTube, Twitter/X, Reddit, and websites
-- **🧠 RAG-Powered Digest Generation**: Semantic search and intelligent ranking using pgvector and Gemini AI
-- **📧 Weekly Email Digests**: Automated personalized summaries delivered via MailerSend
-- **🔄 Feedback Loop**: User feedback continuously improves content relevance
-- **⚡ Real-time Processing**: Background jobs for content ingestion and digest generation
-- **🔐 Secure Authentication**: User management with Supabase Auth
+![Hackathon](https://img.shields.io/badge/AI%20Hackathon-2026-blueviolet?style=for-the-badge)
+![Model](https://img.shields.io/badge/RGF--Net-37.5K%20params-success?style=for-the-badge)
+![Footprint](https://img.shields.io/badge/INT8%20TFLite-37%20KB-brightgreen?style=for-the-badge)
+![Latency](https://img.shields.io/badge/Latency-%3C500ms-orange?style=for-the-badge)
+![Privacy](https://img.shields.io/badge/Cloud-Zero-black?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-## 🚀 Quick Start
+[Live Reference Demo](https://huggingface.co/spaces/Babajaan/Aura-Agent-Neural-Guardian) · [Architecture](docs/ARCHITECTURE.md) · [Demo Script](docs/DEMO_SCRIPT.md) · [Model Card](docs/MODEL_CARD.md) · [Roadmap](docs/ROADMAP.md)
 
-The easiest way to run the entire application:
-
-```bash
-chmod +x start.sh
-./start.sh
-```
-
-This will start both the backend (port 8000) and frontend (port 3000).
-
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
-
-## 📁 Project Structure
-
-```
-Ai-Coach/
-├── backend/              # FastAPI backend application
-│   ├── app/
-│   │   ├── api/         # API endpoints
-│   │   ├── core/        # Core configurations
-│   │   ├── models/      # Database models
-│   │   ├── services/    # Business logic
-│   │   └── main.py      # Application entry point
-│   └── requirements.txt
-├── frontend/            # Next.js frontend application
-│   ├── src/
-│   │   ├── app/         # Next.js App Router pages
-│   │   ├── components/  # React components
-│   │   └── lib/         # Utilities and helpers
-│   └── package.json
-├── docs/                # Documentation
-│   ├── masterRAG.md    # RAG implementation guide
-│   ├── database_setup.md
-│   └── QUICK_START.md
-├── config/             # Configuration files
-│   ├── apis.md        # API specification
-│   └── rss.md         # RSS feed sources
-└── start.sh           # Quick start script
-```
-
-## 🛠️ Tech Stack
-
-### Backend
-- **FastAPI** - Modern Python web framework
-- **Supabase** - PostgreSQL database with pgvector extension
-- **Gemini API** - LLM for embeddings and text generation
-- **APScheduler** - Background job scheduling
-- **Pydantic** - Data validation
-
-### Frontend
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe JavaScript
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Hook Form** - Form management
-- **Axios** - HTTP client
-
-### External Services
-- **Supabase** - Database, authentication, and vector storage
-- **Google Gemini** - LLM and embeddings
-- **MailerSend** - Email delivery service
-
-## 📋 Prerequisites
-
-- Python 3.11+
-- Node.js 18+
-- Supabase account
-- Google Gemini API key
-- MailerSend API key
-
-## 🔧 Manual Setup
-
-### Backend Setup
-
-1. Navigate to backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Create virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Configure environment:
-   ```bash
-   cp .env.template .env
-   ```
-   
-   Edit `.env` with your credentials:
-   - `SUPABASE_URL` and `SUPABASE_KEY`
-   - `GEMINI_API_KEY`
-   - `MAILERSEND_API_KEY`
-   - Social media API keys (optional)
-
-5. Run the backend:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Configure environment:
-   ```bash
-   cp .env.local.template .env.local
-   ```
-   
-   Edit `.env.local` with your backend URL
-
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-## 🎯 Current Status
-
-✅ **Fully Functional**
-
-All core features are implemented and working:
-- ✅ User authentication and management
-- ✅ Learning goal creation and tracking
-- ✅ Multi-source content ingestion
-- ✅ RAG-based content processing
-- ✅ Digest generation with Gemini AI
-- ✅ Email delivery with MailerSend
-- ✅ Responsive Next.js frontend
-- ✅ Background job scheduling
-
-## 📖 Usage
-
-1. **Sign Up**: Create an account at http://localhost:3000/signup
-2. **Set Learning Goals**: Define what you want to learn this week
-3. **Add Content Sources**: Configure RSS feeds, YouTube channels, etc.
-4. **Generate Digest**: Click "Generate Digest" or wait for the scheduled job
-5. **Receive Email**: Get your personalized learning digest via email
-6. **Provide Feedback**: Help improve future recommendations
-
-## 🔑 Environment Variables
-
-### Backend (.env)
-```env
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_anon_key
-GEMINI_API_KEY=your_gemini_api_key
-MAILERSEND_API_KEY=your_mailersend_api_key
-```
-
-### Frontend (.env.local)
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-## 📚 Documentation
-
-- **[Quick Start Guide](docs/QUICK_START.md)** - Get started quickly
-- **[Database Setup](docs/database_setup.md)** - Database configuration
-- **[RAG Implementation](docs/masterRAG.md)** - RAG system details
-- **[API Documentation](config/apis.md)** - API endpoints specification
-- **[RSS Configuration](config/rss.md)** - Configure content sources
-
-## 🧪 Testing
-
-Test the digest generation:
-
-```bash
-# Backend must be running
-curl -X POST http://localhost:8000/api/digest/generate \
-  -H "Content-Type: application/json" \
-  -d '{"user_id": "your_user_id"}'
-```
-
-## 📄 License
-
-MIT
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+</div>
 
 ---
 
-**Built with ❤️ using FastAPI, Next.js, and Gemini AI**
+## 🩺 The Problem
+
+> Roughly **65 million people** worldwide live with epilepsy. **1-in-1000** dies each year from **SUDEP** (Sudden Unexpected Death in Epilepsy) — a class of fatalities that an early warning of **even 30 seconds** can prevent by triggering recovery posture, calling a caregiver, or pulling someone away from danger.
+
+Existing solutions either:
+
+| Existing approach | Why it fails |
+|---|---|
+| Hospital EEG monitoring | Tethered, $$$, not portable |
+| Reactive fall-detection watches | Trigger **after** the seizure — too late |
+| Cloud-based ML services | High latency, privacy nightmare, useless without signal |
+
+**Aura Watch** flips the model: a **37 KB neural network** runs **fully on-device**, fuses **EEG + biometrics**, and predicts the **pre-ictal phase** *before* the convulsion. No cloud. No latency. No data leaves the wrist.
+
+---
+
+## ✨ The Solution
+
+A three-tier **edge-AI safety net** built around our distilled RGF-Net student model:
+
+```
+┌──────────────┐   BLE   ┌───────────────┐   USB/ADB  ┌────────────────┐
+│  Wear OS     │ ──────▶ │  Android      │ ─────────▶ │  Next.js Web   │
+│  Watch App   │ sensors │  Phone App    │  events    │  Dashboard     │
+│              │         │               │            │  (caregivers)  │
+│ • Haptic     │         │ • RGF-Net     │            │                │
+│ • Countdown  │         │   TFLite INT8 │            │ • Live tile    │
+│ • SOS UI     │         │ • SOS dialer  │            │ • Episode log  │
+└──────────────┘         │ • GPS         │            │ • Replay       │
+                         └───────────────┘            └────────────────┘
+                                  │
+                                  ▼
+                          🧠 RGF-Net (37 KB)
+                          Ring-Buffer GRU + FiLM
+                          P(pre-ictal) > 0.75 → ALERT
+```
+
+**Why it's different**: knowledge distillation from a 661K-param Transformer **teacher** (`SeizureTransformer`) into a 37.5K-param **student** (`RGF-Net`) preserves clinical-grade signal-pattern recognition while collapsing the inference cost by **17.6x** — small enough to run on a watch SoC.
+
+---
+
+## 🏗️ Architecture (60-second tour)
+
+| Layer | Stack | Responsibility |
+|---|---|---|
+| **Sensors** | Wear OS BodySensors API | 6 biometric channels @ 1–50 Hz (HR, HRV, accel, gyro, SpO₂, skin temp) |
+| **Signal sim** | Android `Sensor19ChEegSimulator` | Synthesises 19-ch EEG @ 256 Hz from biometrics for the demo path |
+| **Inference** | TensorFlow Lite (NNAPI delegate) | RGF-Net INT8, 5s window, ~22 ms per inference on Pixel 7 |
+| **Logic** | Kotlin coroutines | Threshold check (P > 0.75), 15 s cancellable countdown, escalation |
+| **Alert** | Wear OS haptics + audio + SMS | Local-first SOS to ICE contacts with last-known GPS |
+| **Dashboard** | Next.js 14 + Tailwind + Recharts | Caregiver console, episode timeline, JSON replay |
+| **Training** | PyTorch 2.x → ONNX → TFLite | Reproducible distillation pipeline in `ml/` |
+
+Full system breakdown lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+---
+
+## 📁 Folder Layout
+
+```
+seizure-Project/
+├── 1.prd                       ← Product Requirements (Watch Edition)
+├── README.md                   ← you are here
+├── docs/
+│   ├── ARCHITECTURE.md         ← System diagrams + threading model
+│   ├── DEMO_SCRIPT.md          ← 3-minute live demo runbook
+│   ├── HACKATHON_SUBMISSION.md ← Judging rubric one-pager
+│   ├── MODEL_CARD.md           ← Mitchell-style ML model card
+│   └── ROADMAP.md              ← Post-hackathon plan
+├── ml/                         ← Teacher/Student training, KD loss, TFLite export
+├── web/                        ← Next.js caregiver dashboard
+├── android/
+│   ├── app/                    ← Phone app (inference + SOS orchestration)
+│   ├── wear/                   ← Wear OS tile + complication
+│   └── shared/                 ← Kotlin module shared between phone & watch
+└── reference/                  ← Snapshot of the HF Space (gold-standard)
+```
+
+---
+
+## 🚀 Quickstart
+
+### 1. ML — train or load the RGF-Net student
+
+```bash
+cd ml
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# Option A: download pre-trained weights from the HF reference
+python scripts/fetch_weights.py
+
+# Option B: re-run knowledge distillation end-to-end
+python scripts/train_teacher.py --epochs 30
+python scripts/distill_student.py --teacher checkpoints/teacher.pt
+python scripts/export_tflite.py --quantize int8 --out artifacts/rgfnet_int8.tflite
+```
+
+### 2. Web — caregiver dashboard
+
+```bash
+cd web
+pnpm install
+pnpm dev          # http://localhost:3000
+```
+
+### 3. Android — phone + watch
+
+```bash
+cd android
+./gradlew :app:installDebug      # phone
+./gradlew :wear:installDebug     # paired Wear OS device or emulator
+```
+
+> 💡 **Demo without hardware**: the phone app ships with a `SimulatedEegStream` flag that replays a labelled CHB-MIT clip. See [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md).
+
+---
+
+## 🖼️ Screenshots
+
+> Drop final captures into `docs/img/` before submission.
+
+| Watch — countdown | Phone — alert | Dashboard — timeline |
+|---|---|---|
+| _placeholder_ | _placeholder_ | _placeholder_ |
+
+---
+
+## 🧪 Status & Targets
+
+| Metric | Target | Reference (HF Space) |
+|---|---|---|
+| Model size | ≤ 40 KB | **36.7 KB** ✅ |
+| Pre-ictal sensitivity | ≥ 90% (target) | matches teacher within 3 pp |
+| False alarms / week | ≤ 1 (target) | not yet measured in vivo |
+| Detection latency | < 500 ms | **~22 ms** inference on phone CPU |
+| Battery draw | 3–5% / 24 h (target) | unmeasured |
+
+> ⚠️ Numbers labelled **target** are design goals — see [`docs/MODEL_CARD.md`](docs/MODEL_CARD.md) for what is and isn't yet validated.
+
+---
+
+## 👤 Team
+
+Built solo for AI Hackathon 2026 by **Jaan** ([waadalharbi2@gmail.com](mailto:waadalharbi2@gmail.com)).
+
+Reference deployment: [`Babajaan/Aura-Agent-Neural-Guardian`](https://huggingface.co/spaces/Babajaan/Aura-Agent-Neural-Guardian).
+
+---
+
+## 📜 License
+
+MIT © 2026 Jaan. See `LICENSE`.
+
+> Aura Watch is **not** an FDA-cleared medical device. It is a research prototype intended for hackathon demonstration. Do not rely on it as a sole means of seizure management.
