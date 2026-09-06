@@ -4,6 +4,10 @@
 
 Aura Watch combines an Android application, a Wear OS application, a controlled web demonstration and a separately evaluated EEG machine-learning pipeline. It is a research prototype, not a diagnostic or clinically approved medical device.
 
+**Live controlled demo:** [aura-watch-wine.vercel.app](https://aura-watch-wine.vercel.app)
+
+The poster-ready QR code for the live demo is available at `android/screenshots/aura_watch_vercel_qr.png`.
+
 ## Current status
 
 ### Completed
@@ -57,7 +61,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`, or use the [production deployment](https://aura-watch-wine.vercel.app).
 
 For Vercel, import this repository and set **Root Directory** to `web`.
 
