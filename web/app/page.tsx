@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Activity, Watch, Cpu, Zap, AlertTriangle } from "lucide-react";
+import { Brain, Activity, Watch, Cpu, Zap, AlertTriangle, Github, Images } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { EEGWaveform } from "@/components/EEGWaveform";
 import { RiskGauge } from "@/components/RiskGauge";
@@ -11,12 +11,14 @@ import { InferenceSimulator } from "@/components/InferenceSimulator";
 import { FootprintChart } from "@/components/FootprintChart";
 import { NeuralBackground } from "@/components/NeuralBackground";
 import { SectionHeader } from "@/components/SectionHeader";
+import { PrototypeGallery } from "@/components/PrototypeGallery";
 import { useState } from "react";
 
 const navItems = [
   { id: "monitor", label: "Signals", icon: Activity },
   { id: "architecture", label: "Workflow", icon: Brain },
   { id: "watch", label: "Prototype", icon: Watch },
+  { id: "gallery", label: "Gallery", icon: Images },
   { id: "simulator", label: "Demo", icon: Zap },
   { id: "validation", label: "Validation", icon: Cpu },
 ];
@@ -54,14 +56,26 @@ export default function Page() {
               </a>
             ))}
           </nav>
-          <div className="hidden md:flex items-center gap-2 rounded-full border border-neon-green/30 bg-neon-green/5 px-3 py-1">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-green opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-neon-green" />
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-neon-green">
-              DEMO READY
-            </span>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/Babajan-B/Aura"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View Aura Watch source code on GitHub"
+              title="View source on GitHub"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-700 text-slate-300 transition-colors hover:border-neon-cyan hover:text-neon-cyan"
+            >
+              <Github size={16} />
+            </a>
+            <div className="hidden lg:flex items-center gap-2 rounded-full border border-neon-green/30 bg-neon-green/5 px-3 py-1">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-green opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-neon-green" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-widest text-neon-green">
+                DEMO READY
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -152,10 +166,20 @@ export default function Page() {
         </div>
       </section>
 
+      {/* GALLERY */}
+      <section id="gallery" className="relative py-20 px-6 md:px-10 max-w-7xl mx-auto">
+        <SectionHeader
+          kicker="Section 04 · Emulator captures"
+          title="Phone and Watch Prototype"
+          subtitle="Actual screenshots captured from the Android and Wear OS applications, plus a short functionality walkthrough."
+        />
+        <PrototypeGallery />
+      </section>
+
       {/* SIMULATOR */}
       <section id="simulator" className="relative py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <SectionHeader
-          kicker="Section 04 · Interactive prototype"
+          kicker="Section 05 · Interactive prototype"
           title="Try the Controlled Demo"
           subtitle="Explore interface states with deterministic simulated wearable inputs. This is not clinical inference."
         />
@@ -165,7 +189,7 @@ export default function Page() {
       {/* FOOTPRINT */}
       <section id="validation" className="relative py-20 px-6 md:px-10 max-w-7xl mx-auto">
         <SectionHeader
-          kicker="Section 05 · Offline EEG evaluation"
+          kicker="Section 06 · Offline EEG evaluation"
           title="Held-Out Model Validation"
           subtitle="Stage 13 signal-only results across three classical machine-learning models."
         />
@@ -181,6 +205,14 @@ export default function Page() {
           <div className="font-mono text-[10px] uppercase tracking-widest text-slate-600">
             Research prototype · Not a diagnostic or clinically approved device
           </div>
+          <a
+            href="https://github.com/Babajan-B/Aura"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-slate-400 transition-colors hover:text-neon-cyan"
+          >
+            <Github size={14} /> Source code
+          </a>
         </div>
       </footer>
     </main>
