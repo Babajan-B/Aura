@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "model_role": "wearable_seizure_risk_research_prototype",
+  "model_asset": "aura_watch_signal_model.onnx",
+  "window_seconds": 10,
+  "required_input_size": 20,
+  "temperature_policy": "optional_with_availability_mask",
+  "temperature_units": "degrees_celsius",
+  "feature_order": [
+    "accel_magnitude_mean",
+    "accel_magnitude_std",
+    "accel_magnitude_rms",
+    "accel_magnitude_max",
+    "accel_jerk_mean_abs",
+    "accel_jerk_max_abs",
+    "gyro_magnitude_mean",
+    "gyro_magnitude_std",
+    "gyro_magnitude_max",
+    "heart_rate_mean",
+    "heart_rate_std",
+    "heart_rate_min",
+    "heart_rate_max",
+    "temperature_mean_c",
+    "temperature_std_c",
+    "battery_fraction",
+    "accel_completeness",
+    "gyro_available",
+    "heart_rate_available",
+    "temperature_available"
+  ],
+  "warning": "Deploy only an ONNX model trained with this exact feature order and preprocessing contract."
+}

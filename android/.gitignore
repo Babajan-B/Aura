@@ -1,0 +1,26 @@
+# Build outputs
+**/build/
+.gradle/
+local.properties
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+**/bin/
+.serena/
+
+# OS
+.DS_Store
+
+# Captures
+captures/
+
+# Keystores / signing
+*.jks
+*.keystore
+
+# TFLite weights — don't commit large binaries.
+app/src/main/assets/rgf_net.tflite
+app/src/main/assets/*.onnx
+app/src/main/assets/*.onnx.data

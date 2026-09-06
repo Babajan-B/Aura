@@ -1,0 +1,10 @@
+Place the exported Aura Watch ONNX model here with this exact filename:
+
+aura_watch_signal_model.onnx
+
+The phone app now tries to load this model first. If it is absent, it falls
+back to the existing demo model:
+
+rgf_net.onnx
+
+The model must receive the same feature order used during training/export.
