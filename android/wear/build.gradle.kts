@@ -10,7 +10,9 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.auraguard.wear"
+        // Wear Data Layer routes between companion APKs that share an app ID
+        // and signing certificate. The Kotlin namespace remains wear-specific.
+        applicationId = "com.auraguard.phone"
         minSdk = 30
         targetSdk = 33
         versionCode = 1

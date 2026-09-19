@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "model_role": "scalp_eeg_window_seizure_research_classifier",
+  "model_asset": "aura_watch_eeg_hgb.onnx",
+  "source_model": "hist_gradient_boosting_signal_only.joblib",
+  "input_name": "float_input",
+  "input_dtype": "float32",
+  "required_input_size": 23,
+  "decision_threshold": 0.3029289829079926,
+  "feature_order": [
+    "n_channels_used",
+    "alpha_power_mean",
+    "alpha_power_std",
+    "beta_power_mean",
+    "beta_power_std",
+    "delta_power_mean",
+    "delta_power_std",
+    "gamma_power_mean",
+    "gamma_power_std",
+    "line_length_mean",
+    "line_length_std",
+    "mean_mean",
+    "mean_std",
+    "ptp_mean",
+    "ptp_std",
+    "rms_mean",
+    "rms_std",
+    "std_mean",
+    "std_std",
+    "theta_power_mean",
+    "theta_power_std",
+    "zero_crossing_rate_mean",
+    "zero_crossing_rate_std"
+  ],
+  "validation": {
+    "hpc_onnx_parity_rows": 256,
+    "maximum_absolute_probability_error": 1.1321567788824538e-7,
+    "status": "passed"
+  },
+  "warning": "This model accepts scalp-EEG-derived features only. It must not receive watch IMU, PPG or temperature features. The bundled replay is retrospective and is not clinical validation."
+}

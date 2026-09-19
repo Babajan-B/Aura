@@ -60,6 +60,8 @@ data class SensorPacket(
 
         /** MessageClient path: phone → watch, asking it to raise the countdown. */
         const val ALERT_PATH = "/aura/alert"
+        const val DEMO_MOTION_PATH = "/aura/demo/motion"
+        const val WATCH_TEST_PATH = "/aura/test/seizure"
         const val SOS_PATH = "/aura/sos"
         const val CANCEL_PATH = "/aura/cancel"
 

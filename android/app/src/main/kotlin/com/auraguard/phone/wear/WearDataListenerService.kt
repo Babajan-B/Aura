@@ -65,6 +65,10 @@ class WearDataListenerService : WearableListenerService() {
         when (event.path) {
             SensorPacket.SOS_PATH -> RiskPipeline.onSosFromWatch(applicationContext)
             SensorPacket.CANCEL_PATH -> RiskPipeline.onCancelFromWatch(applicationContext)
+            SensorPacket.WATCH_TEST_PATH -> RiskPipeline.triggerTestCountdown(
+                applicationContext,
+                notifyWatch = false,
+            )
         }
     }
 

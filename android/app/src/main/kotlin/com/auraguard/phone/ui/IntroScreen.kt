@@ -147,7 +147,7 @@ fun IntroScreen(onEnterDemo: () -> Unit) {
             ) {
                 Icon(Icons.Filled.PlayArrow, contentDescription = null)
                 Text(
-                    "ENTER DEMO",
+                    "ENTER TEST",
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 1.sp,

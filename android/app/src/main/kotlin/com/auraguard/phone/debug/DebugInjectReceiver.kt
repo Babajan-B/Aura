@@ -19,6 +19,10 @@ import kotlin.random.Random
  * modes:
  *   force  --ef risk <0..1>     push a fixed risk through the gate
  *   packet --ez shaking <bool>  synthesize a seizure-like / calm motion window
+ *   eeg_replay                  start the held-out EEG feature replay
+ *   eeg_tick                    advance the replay by one window
+ *   motion                      run the synchronized phone/watch motion demo
+ *   seizure                     run the synchronized phone/watch seizure demo
  *   sos                         simulate the watch's countdown elapsing
  */
 class DebugInjectReceiver : BroadcastReceiver() {
@@ -27,11 +31,15 @@ class DebugInjectReceiver : BroadcastReceiver() {
         when (intent.getStringExtra("mode")) {
             "force" -> RiskPipeline.debugForceRisk(context, intent.getFloatExtra("risk", 0.9f))
             "sos" -> RiskPipeline.onSosFromWatch(context)
+            "eeg_replay" -> RiskPipeline.startEegReplay(context)
+            "eeg_tick" -> RiskPipeline.tickEegReplay(context)
+            "motion" -> RiskPipeline.triggerMotionSimulation(context)
+            "seizure" -> RiskPipeline.triggerTestCountdown(context)
             "packet" -> RiskPipeline.process(
                 context,
                 syntheticPacket(intent.getBooleanExtra("shaking", true)),
             )
-            else -> Log.w(TAG, "unknown mode; use force | packet | sos")
+            else -> Log.w(TAG, "unknown mode; use force | packet | eeg_replay | eeg_tick | motion | seizure | sos")
         }
     }
 

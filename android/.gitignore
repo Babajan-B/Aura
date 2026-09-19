@@ -24,3 +24,6 @@ captures/
 app/src/main/assets/rgf_net.tflite
 app/src/main/assets/*.onnx
 app/src/main/assets/*.onnx.data
+
+# Verified compact EEG model used by the retrospective HPC replay demo.
+!app/src/main/assets/aura_watch_eeg_hgb.onnx

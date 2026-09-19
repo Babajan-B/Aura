@@ -161,7 +161,7 @@ fun MonitoringScreen(onSimulateAlert: () -> Unit) {
                     ),
                     label = {
                         Text(
-                            "SIM ALERT",
+                            "TEST ALERT",
                             fontSize = 8.sp,
                             fontFamily = FontFamily.Monospace,
                             letterSpacing = 1.sp,
@@ -182,7 +182,7 @@ private fun temperatureLabel(value: Float?, source: TemperatureSource): String {
         TemperatureSource.WRIST_SKIN -> "SKIN"
         TemperatureSource.AMBIENT -> "AMBIENT"
         TemperatureSource.EXTERNAL -> "EXTERNAL"
-        TemperatureSource.SIMULATED -> "DEMO"
+        TemperatureSource.SIMULATED -> "TEST"
         TemperatureSource.UNAVAILABLE -> "TEMP"
     }
     return "$label ${"%.1f".format(value)} C"

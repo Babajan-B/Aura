@@ -20,6 +20,7 @@ import com.auraguard.wear.MainActivity
 import com.auraguard.wear.WearState
 import com.auraguard.wear.comms.PhoneBridge
 import androidx.core.app.NotificationCompat
+import kotlin.math.sin
 
 /**
  * Foreground service on the watch that:
@@ -46,6 +47,7 @@ class SensorService : Service(), SensorEventListener {
     private val temperature = ArrayList<Float>(SensorPacket.WINDOW_SECONDS)
     private var temperatureSource = TemperatureSource.UNAVAILABLE
     private var windowStartMs = 0L
+    private val emulatorDemoFeed = isWearEmulator()
 
     override fun onCreate() {
         super.onCreate()
@@ -74,10 +76,13 @@ class SensorService : Service(), SensorEventListener {
             temperatureSource = TemperatureSource.AMBIENT
             sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
         }
+        if (emulatorDemoFeed && ambient == null) {
+            temperatureSource = TemperatureSource.SIMULATED
+        }
         WearState.capabilities(
             accel = accel != null,
             gyro = gyro != null,
-            heartRate = heart != null,
+            heartRate = heart != null || emulatorDemoFeed,
             tempSource = temperatureSource,
         )
     }
@@ -103,6 +108,7 @@ class SensorService : Service(), SensorEventListener {
     }
 
     private fun flushWindow() {
+        addEmulatorDemoReadingsIfMissing()
         val packet = SensorPacket(
             capturedAtMs = System.currentTimeMillis(),
             accelX = accelX.toFloatArray(),
@@ -129,6 +135,29 @@ class SensorService : Service(), SensorEventListener {
         gyroX.clear(); gyroY.clear(); gyroZ.clear()
         hr.clear(); temperature.clear()
         windowStartMs = System.currentTimeMillis()
+    }
+
+    /**
+     * Wear emulators do not expose usable PPG or temperature hardware. For debug
+     * builds, supply a deterministic presentation feed for those missing
+     * modalities while preserving the emulator's real motion sensor stream.
+     * The SIMULATED source is carried to the phone and displayed as DEMO.
+     */
+    private fun addEmulatorDemoReadingsIfMissing() {
+        if (!emulatorDemoFeed) return
+
+        val phase = System.currentTimeMillis() / 1000.0
+        if (hr.isEmpty()) {
+            repeat(SensorPacket.WINDOW_SECONDS) { index ->
+                hr.add((78.0 + 3.0 * sin((phase + index) / 3.0)).toFloat())
+            }
+        }
+        if (temperature.isEmpty()) {
+            temperatureSource = TemperatureSource.SIMULATED
+            repeat(SensorPacket.WINDOW_SECONDS) { index ->
+                temperature.add((33.5 + 0.2 * sin((phase + index) / 8.0)).toFloat())
+            }
+        }
     }
 
     private fun readBatteryPct(): Float {
@@ -178,5 +207,12 @@ class SensorService : Service(), SensorEventListener {
         private const val NOTIFICATION_ID = 1001
         private const val WINDOW_ACCEL_SAMPLES =
             SensorPacket.WINDOW_SECONDS * SensorPacket.ACCEL_HZ
+
+        private fun isWearEmulator(): Boolean =
+            Build.FINGERPRINT.startsWith("generic") ||
+                Build.FINGERPRINT.contains("emulator", ignoreCase = true) ||
+                Build.MODEL.contains("sdk_gwear", ignoreCase = true) ||
+                Build.PRODUCT.contains("wear", ignoreCase = true) &&
+                Build.HARDWARE.contains("ranchu", ignoreCase = true)
     }
 }

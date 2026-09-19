@@ -71,7 +71,7 @@ fun AlertConfirmedScreen(onReset: () -> Unit) {
                 Spacer(Modifier.height(4.dp))
 
                 Text(
-                    "DEMO",
+                    "TEST",
                     color = PINK,
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
@@ -90,17 +90,26 @@ fun AlertConfirmedScreen(onReset: () -> Unit) {
                 Spacer(Modifier.height(4.dp))
 
                 Text(
-                    "Caregiver escalation",
+                    "GPS ATTACHED",
                     color = Color.White,
-                    fontSize = 9.sp,
+                    fontSize = 8.sp,
                     fontFamily = FontFamily.Monospace,
                 )
                 Text(
-                    "Proposed workflow",
-                    color = PINK.copy(alpha = 0.8f),
-                    fontSize = 9.sp,
+                    "SMS SENT · TEST",
+                    color = Color.White,
+                    fontSize = 8.sp,
                     fontFamily = FontFamily.Monospace,
                 )
+                Text(
+                    "CALLING CONTACT · TEST",
+                    color = PINK,
+                    fontSize = 8.sp,
+                    fontFamily = FontFamily.Monospace,
+                )
+
+                Text("NO REAL CALL", color = PINK.copy(alpha = 0.75f), fontSize = 7.sp,
+                    fontFamily = FontFamily.Monospace)
 
                 Spacer(Modifier.height(8.dp))
 

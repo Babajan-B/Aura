@@ -54,7 +54,7 @@
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
                 <data
                     android:host="*"
-                    android:pathPrefix="/aura/alert"
+                    android:pathPrefix="/aura/"
                     android:scheme="wear" />
             </intent-filter>
         </service>

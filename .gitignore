@@ -83,3 +83,5 @@ START_HERE.md
 TEST_RESULTS.md
 VERIFICATION_REPORT.md
 api and rss.md
+*.apk
+*.zip

@@ -16,7 +16,7 @@ object AuraState {
         val risk: Float? = 0.12f,
         val movingAvgRisk: Float? = 0.12f,
         val predictionStatus: PredictionStatus = PredictionStatus.DEMO,
-        val modelName: String = "Controlled demo",
+        val modelName: String = "Controlled test",
         val heartRate: Float? = 72f,
         val temperatureC: Float? = 33.4f,
         val temperatureSource: TemperatureSource = TemperatureSource.SIMULATED,
@@ -33,6 +33,11 @@ object AuraState {
         val demoRunning: Boolean = false,
         val demoTick: Int = 0,
         val demoStage: String = "Ready to start",
+        val replayRunning: Boolean = false,
+        val replayPosition: Int = 0,
+        val replayTotal: Int = 0,
+        val replayDataset: String? = null,
+        val replayGroundTruth: String? = null,
         val updatedAtMs: Long = System.currentTimeMillis(),
     )
 
@@ -116,7 +121,7 @@ object AuraState {
             gyroAvailable = true,
             motionPreview = motionPreview,
             predictionStatus = PredictionStatus.DEMO,
-            modelName = "Demo signal generator - no clinical model",
+            modelName = "Test signal generator - no clinical model",
             demoRunning = running,
             demoTick = tick,
             demoStage = stage,
@@ -124,8 +129,71 @@ object AuraState {
         )
     }
 
+    fun updateWearableTestFrame(
+        risk: Float,
+        heartRate: Float,
+        temperatureC: Float,
+        motionPreview: FloatArray,
+        stage: String,
+    ) {
+        _state.value = _state.value.copy(
+            mode = MonitoringMode.WEARABLE,
+            risk = risk,
+            movingAvgRisk = risk,
+            predictionStatus = PredictionStatus.DEMO,
+            modelName = "Wearable test scenario - no clinical model",
+            heartRate = heartRate,
+            temperatureC = temperatureC,
+            temperatureSource = TemperatureSource.SIMULATED,
+            temperatureBaselineC = 33.1f,
+            batteryPct = 0.84f,
+            connected = true,
+            accelCompleteness = 1f,
+            gyroAvailable = true,
+            motionPreview = motionPreview,
+            demoRunning = false,
+            demoStage = stage,
+            updatedAtMs = System.currentTimeMillis(),
+        )
+    }
+
     fun stopDemo(stage: String = "Paused") {
         _state.value = _state.value.copy(demoRunning = false, demoStage = stage)
+    }
+
+    fun updateFromEegReplay(
+        risk: Float?,
+        movingAvgRisk: Float?,
+        predictionStatus: PredictionStatus,
+        modelName: String,
+        replayPosition: Int,
+        replayTotal: Int,
+        replayDataset: String,
+        replayGroundTruth: String,
+        riskHistory: FloatArray,
+        running: Boolean,
+    ) {
+        _state.value = _state.value.copy(
+            mode = MonitoringMode.EEG_RESEARCH,
+            risk = risk,
+            movingAvgRisk = movingAvgRisk,
+            predictionStatus = predictionStatus,
+            modelName = modelName,
+            connected = true,
+            accelCompleteness = 1f,
+            gyroAvailable = false,
+            motionPreview = riskHistory,
+            replayRunning = running,
+            replayPosition = replayPosition,
+            replayTotal = replayTotal,
+            replayDataset = replayDataset,
+            replayGroundTruth = replayGroundTruth,
+            updatedAtMs = System.currentTimeMillis(),
+        )
+    }
+
+    fun stopEegReplay(message: String) {
+        _state.value = _state.value.copy(replayRunning = false, modelName = message)
     }
 
     private fun emptyLiveSnapshot(mode: MonitoringMode, modelName: String) = Snapshot(

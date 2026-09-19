@@ -26,7 +26,7 @@ class InferenceEngine private constructor(
     private val loadedAsset: String?,
 ) {
 
-    enum class ModelKind { WEARABLE, EEG, NONE }
+    enum class ModelKind { WEARABLE, EEG_FEATURES, EEG_RAW, NONE }
 
     sealed interface ScoreResult {
         data class Prediction(val probability: Float) : ScoreResult
@@ -35,7 +35,8 @@ class InferenceEngine private constructor(
 
     val modelKind: ModelKind = when (loadedAsset) {
         AURA_SIGNAL_MODEL_ASSET -> ModelKind.WEARABLE
-        RGF_MODEL_ASSET -> ModelKind.EEG
+        AURA_EEG_MODEL_ASSET -> ModelKind.EEG_FEATURES
+        RGF_MODEL_ASSET -> ModelKind.EEG_RAW
         else -> ModelKind.NONE
     }
 
@@ -52,6 +53,16 @@ class InferenceEngine private constructor(
         }
         if (expectedInputSize != null && expectedInputSize != input.size) {
             return ScoreResult.Unavailable("Model expects $expectedInputSize features; app produced ${input.size}")
+        }
+        return ScoreResult.Prediction(score(input))
+    }
+
+    fun scoreEegFeatures(input: FloatArray): ScoreResult {
+        if (modelKind != ModelKind.EEG_FEATURES) {
+            return ScoreResult.Unavailable("Verified EEG feature model is not installed")
+        }
+        if (expectedInputSize != input.size) {
+            return ScoreResult.Unavailable("EEG model expects $expectedInputSize features; replay supplied ${input.size}")
         }
         return ScoreResult.Prediction(score(input))
     }
@@ -165,13 +176,20 @@ class InferenceEngine private constructor(
         const val EEG_SAMPLES = N_CHANNELS * WINDOW_SAMPLES   // 24320
         const val BIOMETRIC_FEATURES = 6
         const val INPUT_SIZE = EEG_SAMPLES + BIOMETRIC_FEATURES  // 24326
+        const val AURA_EEG_MODEL_ASSET = "aura_watch_eeg_hgb.onnx"
         const val AURA_SIGNAL_MODEL_ASSET = "aura_watch_signal_model.onnx"
         const val RGF_MODEL_ASSET = "rgf_net.onnx"
         const val RISK_THRESHOLD = 0.75f
+        const val EEG_HGB_THRESHOLD = 0.30292898f
         private const val STUB_SCORE = 0.05f
 
-        fun create(context: Context): InferenceEngine {
-            val assets = listOf(AURA_SIGNAL_MODEL_ASSET, RGF_MODEL_ASSET)
+        fun createWearable(context: Context): InferenceEngine =
+            create(context, listOf(AURA_SIGNAL_MODEL_ASSET))
+
+        fun createEegFeatures(context: Context): InferenceEngine =
+            create(context, listOf(AURA_EEG_MODEL_ASSET))
+
+        private fun create(context: Context, assets: List<String>): InferenceEngine {
             for (asset in assets) {
                 try {
                     val bytes = context.assets.open(asset).readBytes()
@@ -186,7 +204,7 @@ class InferenceEngine private constructor(
                     Log.w(TAG, "$asset not found or failed to load", t)
                 }
             }
-            Log.w(TAG, "No ONNX model asset loaded; using stub")
+            Log.w(TAG, "No compatible ONNX model asset loaded from $assets")
             return InferenceEngine(null, null, null)
         }
     }

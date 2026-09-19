@@ -1,0 +1,112 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                     AURA WATCH — HACKATHON SUBMISSION                       ║
+║                         Ready to Submit ✅                                   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📋 FILES READY FOR SUBMISSION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Location: /Users/jaan/Desktop/seizure-Project/
+
+Required files to upload to hackathon:
+
+1. ✅ HACKATHON_SUBMISSION_PACKAGE.md (11 KB)
+   └─ Complete project information + all technical details
+
+2. ✅ aura-watch-hackathon-submission.zip (1.3 MB)
+   └─ Full source code: web, android, ml, reference, docs
+   └─ 118 files total, node_modules excluded
+
+3. ✅ SUBMISSION_README.md (7 KB)
+   └─ Quick start guide + how to run each component
+
+4. ✅ SCREENSHOTS_GUIDE.md (5.9 KB)
+   └─ Dashboard walkthrough with live server instructions
+
+5. ✅ SUBMIT_TO_HACKATHON.md (This guide)
+   └─ Copy-paste text for each field + talking points
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 HACKATHON FORM FIELDS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+See SUBMIT_TO_HACKATHON.md for copy-paste text for:
+  ✓ Project Name
+  ✓ Project Description
+  ✓ Problem Statement
+  ✓ Proposed Solution
+  ✓ Project Availability (Option A: We have a prototype)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK START FOR JUDGES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. View the web dashboard (60 seconds):
+   $ cd web
+   $ npm run dev
+   → Opens http://localhost:3001
+   → Fully interactive: 7 animated sections, live risk simulator
+
+2. Build & run Android app (10 minutes):
+   $ Open seizure-Project/android in Android Studio
+   $ Create Pixel 7 + Wear OS emulators
+   $ Run :app and :wear
+   $ Tap "Inject Seizure Pattern" to test end-to-end flow
+
+3. Generate the TFLite model (5 minutes):
+   $ cd ml
+   $ python train_and_export.py
+   → Outputs: rgf_net.tflite (36.7 KB)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 KEY METRICS TO MENTION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Model size (INT8 quantized): 36.7 KB
+✓ Model parameters (student): 37,554
+✓ Inference latency: ~22 ms (Pixel 7)
+✓ Model compression: 17.6× (661K → 37.5K)
+✓ Lines of code: ~3,490
+✓ Source files: 56
+✓ Technologies: Kotlin, TypeScript, Python
+✓ Time to demo: 5–15 minutes from extraction
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 DEMO SCRIPT (3 MINUTES):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0:00-0:30 → Show HuggingFace reference model
+0:30-1:30 → Launch web dashboard, show 7 interactive sections
+1:30-2:00 → Drag biometric sliders, show real-time risk updates
+2:00-2:30 → Open Android emulators (phone + watch)
+2:30-2:50 → Tap "Inject Seizure Pattern" → watch countdown
+2:50-3:00 → Highlight numbers: 37 KB, 17.6× compression, <500ms latency
+
+(See docs/DEMO_SCRIPT.md for detailed runbook)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ SUBMISSION CHECKLIST:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+REQUIRED FIELDS:
+  ☐ Project Name (copy from SUBMIT_TO_HACKATHON.md)
+  ☐ Project Description (copy from SUBMIT_TO_HACKATHON.md)
+  ☐ Problem Statement (copy from SUBMIT_TO_HACKATHON.md)
+  ☐ Proposed Solution (copy from SUBMIT_TO_HACKATHON.md)
+  ☐ Project Availability: Select "A: We have a prototype"
+
+SUPPORTING DOCUMENTS:
+  ☐ HACKATHON_SUBMISSION_PACKAGE.md (11 KB)
+  ☐ aura-watch-hackathon-submission.zip (1.3 MB)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generated: 2026-04-29
+Status: ✅ READY FOR HACKATHON SUBMISSION

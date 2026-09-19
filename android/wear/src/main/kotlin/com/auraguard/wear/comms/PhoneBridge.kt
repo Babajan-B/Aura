@@ -51,6 +51,8 @@ class PhoneBridge(context: Context) {
 
     fun cancelAlert() = sendMessage(SensorPacket.CANCEL_PATH)
 
+    fun requestSeizureTest() = sendMessage(SensorPacket.WATCH_TEST_PATH)
+
     private fun sendMessage(path: String) {
         Wearable.getNodeClient(appContext).connectedNodes
             .addOnSuccessListener { nodes ->

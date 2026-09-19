@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.*
 import kotlinx.coroutines.delay
+import com.auraguard.shared.DemoEvent
 
 private val BG       = Color(0xFF120A02)
 private val AMBER     = Color(0xFFFBBF24)
@@ -29,6 +30,7 @@ private val AMBER_DIM = Color(0xFF3D2E0E)
  */
 @Composable
 fun CountdownScreen(
+    event: DemoEvent?,
     onDismiss: () -> Unit,
     onElapsed: () -> Unit,
 ) {
@@ -81,9 +83,9 @@ fun CountdownScreen(
                 modifier = Modifier.fillMaxSize(0.62f),
             ) {
                 Text(
-                    "HIGH RISK",
+                    "TEST SEIZURE RISK ${event?.risk?.times(100)?.toInt() ?: 90}%",
                     color = AMBER,
-                    fontSize = 9.sp,
+                    fontSize = 7.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Monospace,
                     letterSpacing = 2.sp,
@@ -103,6 +105,13 @@ fun CountdownScreen(
                     fontSize = 7.sp,
                     fontFamily = FontFamily.Monospace,
                     letterSpacing = 1.sp,
+                )
+
+                Text(
+                    "HR ${event?.heartRate?.toInt() ?: 96} · ${"%.1f".format(event?.temperatureC ?: 34f)} C",
+                    color = Color.White.copy(alpha = 0.85f),
+                    fontSize = 7.sp,
+                    fontFamily = FontFamily.Monospace,
                 )
 
                 Spacer(Modifier.height(7.dp))

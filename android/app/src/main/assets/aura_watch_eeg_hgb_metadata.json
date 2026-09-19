@@ -1,0 +1,59 @@
+{
+  "model_file": "/ddn/data/generic/bbabajan/aura_watch/processed/stage13_exact_signal_model/hist_gradient_boosting_signal_only.joblib",
+  "onnx_file": "/ddn/data/generic/bbabajan/aura_watch/processed/stage13_exact_signal_model/android_onnx_export/hist_gradient_boosting_signal_only.onnx",
+  "model_class": "sklearn.pipeline.Pipeline",
+  "n_features": 23,
+  "feature_names": [
+    "n_channels_used",
+    "alpha_power_mean",
+    "alpha_power_std",
+    "beta_power_mean",
+    "beta_power_std",
+    "delta_power_mean",
+    "delta_power_std",
+    "gamma_power_mean",
+    "gamma_power_std",
+    "line_length_mean",
+    "line_length_std",
+    "mean_mean",
+    "mean_std",
+    "ptp_mean",
+    "ptp_std",
+    "rms_mean",
+    "rms_std",
+    "std_mean",
+    "std_std",
+    "theta_power_mean",
+    "theta_power_std",
+    "zero_crossing_rate_mean",
+    "zero_crossing_rate_std"
+  ],
+  "decision_threshold": 0.3029289829079926,
+  "input_name": "float_input",
+  "input_dtype": "float32",
+  "output_note": "For classifiers, ONNX output usually contains label and probability tensor. Use the probability for the high-risk class as Aura Watch risk score.",
+  "smoke_test": {
+    "onnx_file": "/ddn/data/generic/bbabajan/aura_watch/processed/stage13_exact_signal_model/android_onnx_export/hist_gradient_boosting_signal_only.onnx",
+    "input_name": "float_input",
+    "output_shapes": [
+      [
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "output_names": [
+      "label",
+      "probabilities"
+    ],
+    "status": "passed"
+  },
+  "parity_test": {
+    "rows": 256,
+    "max_absolute_probability_error": 1.1321567788824538e-07,
+    "mean_absolute_probability_error": 2.9386894219077643e-08,
+    "status": "passed"
+  }
+}

@@ -1,0 +1,76 @@
+This updated PRD incorporates the existing **Aura-Agent-Neural-Guardian** live deployment as the core logic provider and foundational prototype for the mobile transition.
+
+---
+
+# **PRD: Neural Guardian (Watch Edition)**
+**Project Code:** Aura-Watch-2026  
+**Reference Prototype:** [Hugging Face: Babajaan/Aura-Agent-Neural-Guardian](https://huggingface.co/spaces/Babajaan/Aura-Agent-Neural-Guardian)  
+**Core Model:** RGF-Net (Ring-Buffer GRU)  
+**Target Footprint:** < 40 KB  
+
+---
+
+## **1. Product Vision**
+To transition the validated "Micro-Expert" architecture from its current web-based demonstration to a standalone, high-performance smartwatch application. The goal is a "Local-First" safety net that detects tonic-clonic seizures in real-time using localized hardware, ensuring zero latency and 100% data privacy.
+
+---
+
+## **2. Foundational Asset (Reference Deployment)**
+The project utilizes the existing **Aura-Agent-Neural-Guardian** infrastructure:
+* **Model Weights:** The 37,554-parameter RGF-Net, currently validated in the Hugging Face Space.
+* **Compression Status:** Proven 36.7 KB footprint via INT8 quantization.
+* **Logic Engine:** Transitioning the Python-based `smolagents` logic into native hardware-accelerated code (CoreML/TFLite).
+
+---
+
+## **3. Functional Requirements**
+
+### **FR-1: Real-Time Sensor Fusion**
+* **Motion Ingestion:** Capture 3-axis Accelerometer and Gyroscope data (30Hz–50Hz).
+* **Physiological Ingestion:** Capture PPG heart rate data (1Hz) to monitor for Ictal Tachycardia.
+* **The Fusion Logic:** The RGF-Net must analyze the correlation between rhythmic motor patterns and sudden cardiac spikes.
+
+### **FR-2: On-Device Inference**
+* **Model Execution:** Deploy the INT8-quantized weights directly to the watch co-processor.
+* **Ring-Buffer Context:** Maintain a 10-second sliding window of raw sensor data. As new data enters, the oldest is purged, providing the model with continuous temporal context without memory overflow.
+
+### **FR-3: Alerting & Emergency Response**
+* **Haptic Pattern:** Trigger a specialized "Urgent" vibration upon detection (Probability > 0.85).
+* **Countdown Protocol:** A 15-second visual countdown allowing the user to cancel false alarms.
+* **Emergency Trigger:** Upon expiration, initiate a loud audible alarm and local SOS signal to the paired smartphone.
+
+---
+
+## **4. Non-Functional Requirements**
+
+### **NFR-1: Battery Optimization**
+* Maximum power draw of **3-5% per 24 hours**. This is achieved by keeping the inference entirely on the low-power Neural Engine/NPU.
+
+### **NFR-2: Latency**
+* **Detection-to-Response:** < 500ms. All processing must be local; no cloud pings allowed for the core detection loop.
+
+### **NFR-3: Reliability**
+* The application must remain resident in the watch's memory (High Priority Process) to ensure monitoring continues during background activities.
+
+---
+
+## **5. Technical Architecture Mapping**
+
+| Layer | Component | Specification |
+| :--- | :--- | :--- |
+| **Source Engine** | **Aura-Agent-Neural-Guardian** | Verified RGF-Net Weights (37,554 params) |
+| **Input Pipeline** | CoreMotion (iOS) / SensorManager (Android) | 3-axis Accel + PPG |
+| **Processing** | Ring-Buffer Array | 10s Fixed Window |
+| **Inference** | CoreML / TFLite Micro | 36.7 KB INT8 Runtime |
+| **Interface** | SwiftUI / Jetpack Compose | High-contrast Emergency UI |
+
+---
+
+## **6. Success Metrics**
+* **Validation:** Match the 90%+ sensitivity performance currently observed in the Hugging Face Space.
+* **Efficiency:** Maintain the sub-40 KB model footprint during conversion.
+* **False Alarm Rate:** Achieve < 1 false positive per week during standard daily motion (walking, typing).
+
+---
+
+**Development Note:** The current Hugging Face Space (`Babajaan/Aura-Agent-Neural-Guardian`) serves as the "Gold Standard" for model behavior. Any variance in the Watch Edition's performance must be benchmarked against this reference deployment.
